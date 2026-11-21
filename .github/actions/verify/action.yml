@@ -1,0 +1,151 @@
+name: Build, verify, and package
+description: Build, verify, and package
+inputs:
+  rid:
+    required: true
+    description: ''
+  log_name:
+    required: true
+    description: ''
+  runtime_version:
+    required: true
+    description: ''
+  gd32emu_token:
+    default: ''
+    description: ''
+  gd32emu_url:
+    default: ''
+    description: ''
+  gd32emu_sha256:
+    default: ''
+    description: ''
+  gd32emu_repo:
+    default: ''
+    description: ''
+  gd32emu_ref:
+    default: ''
+    description: ''
+  adt_test_dumps_repo:
+    default: ''
+    description: ''
+  adt_test_dumps_ref:
+    default: ''
+    description: ''
+  adt_test_stock_dump:
+    default: ''
+    description: ''
+  adt_test_stock_dump_dec:
+    default: ''
+    description: ''
+  adt_test_dump_token:
+    default: ''
+    description: ''
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      with:
+        python-version: '3.12'
+    - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      with:
+        dotnet-version: '10.0.x'
+    - name: Configure user-owned .NET runtime directory
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        shm_dir="${RUNNER_TEMP:-/tmp}/dotnet-shm-$(id -u)"
+        mkdir -p "$shm_dir"
+        chmod 700 "$shm_dir"
+        {
+          echo "TMPDIR=$shm_dir"
+          echo "XDG_RUNTIME_DIR=$shm_dir"
+          echo "DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1"
+          echo "DOTNET_NOLOGO=true"
+        } >> "$GITHUB_ENV"
+        TMPDIR="$shm_dir" XDG_RUNTIME_DIR="$shm_dir" DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 DOTNET_NOLOGO=true dotnet --help >/dev/null
+    - name: Ensure Rosetta 2 when running osx-x64 on Apple Silicon
+      if: runner.os == 'macOS' && inputs.rid == 'osx-x64'
+      shell: bash
+      run: |
+        if [ "$(uname -m)" != "x86_64" ]; then
+          if ! /usr/bin/arch -x86_64 /usr/bin/true >/dev/null 2>&1; then
+            softwareupdate --install-rosetta --agree-to-license
+          fi
+          /usr/bin/arch -x86_64 /usr/bin/uname -m
+        fi
+    - name: Resolve emulator source
+      shell: bash
+      env:
+        GD32EMU_TOKEN: ${{ inputs.gd32emu_token }}
+        GD32EMU_URL: ${{ inputs.gd32emu_url }}
+        GD32EMU_SHA256: ${{ inputs.gd32emu_sha256 }}
+        GD32EMU_REPO: ${{ inputs.gd32emu_repo }}
+        GD32EMU_REF: ${{ inputs.gd32emu_ref }}
+      run: python -I tests/prepare-emulator.py
+    - name: Build Windows
+      if: runner.os == 'Windows'
+      shell: cmd
+      run: build.cmd
+    - name: Publish native binary
+      if: runner.os != 'Windows'
+      shell: bash
+      env:
+        RUNTIME_VERSION: ${{ inputs.runtime_version }}
+      run: |
+        dotnet publish AnargonsTabletTools.csproj -c Release -r '${{ inputs.rid }}' -p:RuntimeFrameworkVersion="$RUNTIME_VERSION" -p:Gd32EmuDir=gd32emu/ -o .publish
+        cp .publish/AnargonsTabletTools .
+    - name: Run regressions
+      shell: bash
+      env:
+        GD32EMU_DIR: gd32emu
+      run: |
+        python -I tests/test-infrastructure.py
+        python -I tests/run-regressions.py --uncapped
+    - name: Smoke check
+      shell: bash
+      env:
+        RID: ${{ inputs.rid }}
+      run: |
+        exe=./AnargonsTabletTools
+        if [ "$RID" = win-x64 ]; then exe="$exe.exe"; fi
+        python -I tests/run-tests.py "$exe" --smoke --uncapped
+    - name: Full stock firmware verification
+      if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+      shell: bash
+      env:
+        RID: ${{ inputs.rid }}
+        ADT_TEST_DUMPS_REPO: ${{ inputs.adt_test_dumps_repo || 'https://github.com/Anargon-osu/deco640-resources' }}
+        ADT_TEST_DUMPS_REF: ${{ inputs.adt_test_dumps_ref }}
+        ADT_TEST_STOCK_DUMP: ${{ inputs.adt_test_stock_dump }}
+        ADT_TEST_STOCK_DUMP_DEC: ${{ inputs.adt_test_stock_dump_dec }}
+        ADT_TEST_DUMP_TOKEN: ${{ inputs.adt_test_dump_token }}
+      run: |
+        exe=./AnargonsTabletTools
+        if [ "$RID" = win-x64 ]; then exe="$exe.exe"; fi
+        python -I tests/run-tests.py "$exe" --require-all-firmware --uncapped
+    - name: Package release artifact
+      shell: bash
+      env:
+        RID: ${{ inputs.rid }}
+        RUNTIME_VERSION: ${{ inputs.runtime_version }}
+      run: |
+        exe=./AnargonsTabletTools
+        if [ "$RID" = win-x64 ]; then exe="$exe.exe"; fi
+        args=()
+        if [ "$RID" != win-x64 ]; then args=(--runtime-version "$RUNTIME_VERSION"); fi
+        python -I tests/package.py "$exe" "$RID" "${args[@]}"
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      with:
+        name: anargons-tablet-tools-${{ inputs.rid }}
+        path: packages/*
+        if-no-files-found: error
+    - name: Upload test logs
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      with:
+        name: test-logs-${{ inputs.log_name }}
+        path: |
+          tests/work/**/*.txt
+          !tests/work/dumps-repo/**
+        if-no-files-found: warn

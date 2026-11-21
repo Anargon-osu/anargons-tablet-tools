@@ -1,0 +1,31 @@
+{
+  "revision": "R37",
+  "structure": "two separate sibling projects; root history is the rolling model handoff",
+  "model": "Codex (GPT 6 Astra Ultra [Max thinking with Multiagentic Capability])",
+  "reasoning_effort": "Ultra",
+  "corrected_layout_regressions": {
+    "core-regressions": 106,
+    "host-regressions": 56,
+    "calibration-regressions": 56
+  },
+  "retained_runtime_verification": {
+    "core": 130,
+    "host": 67,
+    "calibration": 88,
+    "emulator": 51,
+    "february_integration": {
+      "passed": 37,
+      "failed": 0,
+      "skipped_december": 1
+    },
+    "windows_process_lifecycle": 4,
+    "real_console_enter_prompts": 12
+  },
+  "runtime_equivalence": "The verified R37 runtime source is preserved; only --version/help display changed to the rolling R37 label. See runtime-code-comparison.json.",
+  "limits": [
+    "No physical tablet communication or flash timing was tested.",
+    "December firmware fixture unavailable.",
+    "Hosted GitHub Actions and native Linux/macOS execution were not run locally.",
+    "Pen resonance is the firmware tracked estimate, not an independent peak sweep."
+  ]
+}

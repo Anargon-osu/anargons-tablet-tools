@@ -1,0 +1,116 @@
+name: build
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - 'v*'
+      - 'V*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  win-x64:
+    name: Windows
+    uses: ./.github/workflows/verify-os.yml
+    secrets: inherit
+    with:
+      rid: win-x64
+      primary_runner: windows-latest
+      primary_name: Github
+      fallback_runner: avrea-windows-2025-4-vcpu
+      fallback_name: Avrea (Fallback)
+      required: true
+      runtime_version: '10.0.14'
+
+  linux-x64:
+    name: Linux
+    uses: ./.github/workflows/verify-os.yml
+    secrets: inherit
+    with:
+      rid: linux-x64
+      primary_runner: ubuntu-latest
+      primary_name: Github
+      fallback_runner: avrea-ubuntu-latest
+      fallback_name: Avrea (Fallback)
+      required: true
+      runtime_version: '10.0.14'
+
+  osx-x64:
+    name: MacOS-x86
+    uses: ./.github/workflows/verify-os.yml
+    secrets: inherit
+    with:
+      rid: osx-x64
+      primary_runner: macos-15-intel
+      primary_name: Github
+      fallback_runner: avrea-macos-latest
+      fallback_name: Avrea (Fallback)
+      required: true
+      runtime_version: '10.0.14'
+
+  osx-arm64:
+    name: MacOS-arm
+    uses: ./.github/workflows/verify-os.yml
+    secrets: inherit
+    with:
+      rid: osx-arm64
+      primary_runner: avrea-macos-latest
+      primary_name: Avrea
+      fallback_runner: macos-15
+      fallback_name: Github (Fallback)
+      required: true
+      runtime_version: '10.0.14'
+
+  release:
+    name: Release
+    needs: [win-x64, linux-x64, osx-x64, osx-arm64]
+    if: always()
+    runs-on: ${{ needs.linux-x64.outputs.primary_ok == 'true' && 'ubuntu-latest' || 'avrea-ubuntu-latest' }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 1
+          fetch-tags: true
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: anargons-tablet-tools-*
+          path: packages
+          merge-multiple: true
+      - name: Verify required packages and create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          REF: ${{ github.ref }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          RELEASE_TAG=""
+          case "$REF" in
+            refs/tags/[vV]*) RELEASE_TAG="$REF_NAME" ;;
+            *)
+              RELEASE_TAG="$(git tag --points-at HEAD --sort=-v:refname | grep -E '^[vV]' | head -n 1 || true)"
+              ;;
+          esac
+
+          if [ -z "$RELEASE_TAG" ]; then
+            echo "No v*/V* release tag on HEAD; skipping release."
+            exit 0
+          fi
+
+          mkdir -p packages
+          for req in win-x64 linux-x64 osx-x64 osx-arm64; do
+            if ! compgen -G "packages/anargons-tablet-tools-${req}*" >/dev/null; then
+              echo "Missing required verified package for ${req}; aborting release."
+              exit 1
+            fi
+          done
+
+          pre=()
+          case "$RELEASE_TAG" in *[Rr][Cc]*) pre=(--prerelease) ;; esac
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --draft --verify-tag --generate-notes "${pre[@]}"
+          fi
+          gh release upload "$RELEASE_TAG" packages/* --clobber

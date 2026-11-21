@@ -1,0 +1,327 @@
+Input file: /home/user/deco640/input/deco01v3-main.bin
+   application 0x08003800..0x0800c7cc (36812 bytes; this firmware's image ends at 0x0800c7cc)
+   firmware build string: '2025-02-14_release001'
+   identical to the verified 2025-02-14_release001 stock image (CRC-32 B65DB693)
+   firmware layout: 91/91 firmware locations found; offset from the 2025-02-14 layout: 0x0800395c +0
+
+== Preset 1/5: STOCK (220) - vendor timing, not paced
+   output: superspeed-stock-wposinterpolation.hex
+   settings: Jump Rejection n/a, Movement Smoothing off, Startup Calibration n/a, Position Interpolation on, Aggressive Position Interpolation n/a, Hover Boost n/a, Reach Stage n/a, Long-range Pickup n/a, Dual-coil Mode n/a, Volatile Changes on, Bootloader Changes off, Bootloader Counter n/a
+   version string (locked): AnargonSS727_20261103
+   changes:
+   0x0800398c: +44 bytes  software divide -> hardware UDIV (same results, div-by-zero behaviour kept)
+   0x080041c4:     4621 -> 0021     speed-adaptive deadband coefficient 70 -> 0
+   0x080041c6:     1922 -> 0022     speed-adaptive deadband coefficient 25 -> 0
+   0x080041ca:     3c21 -> 0021     speed-adaptive deadband coefficient 60 -> 0
+   0x080041ce:     3221 -> 0021     speed-adaptive deadband coefficient 50 -> 0
+   0x080041d2:     2d21 -> 0021     speed-adaptive deadband coefficient 45 -> 0
+   0x080041d6:     2821 -> 0021     speed-adaptive deadband coefficient 40 -> 0
+   0x080041da:     2321 -> 0021     speed-adaptive deadband coefficient 35 -> 0
+   0x080041de:     1e21 -> 0021     speed-adaptive deadband coefficient 30 -> 0
+   0x08004258:     1420 -> 0020     deadband floor 20 -> 0
+   0x0800c63b:       03 -> 01       EP81/EP82 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c658:       03 -> 01       EP83 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c7cc: +16 bytes  pressure-table index clamp (<= 74, from a 76-entry table)
+   0x0800762c: b0fbf1f1 -> 05f0ceb8 pressure index -> clamp
+   0x0800c7dc: +36 bytes  resonance band-edge hold (540-545 kHz -> 539.999 kHz)
+   0x08007656: 18445060 -> 05f0c1b8 resonance estimate -> band-edge hold
+   0x0800c800: +296 bytes  flash-count readout: USB string 173 ("ADTC1:<B|F|N>:<count>")
+   0x0800af72: fff7d1fd -> 01f045fc GET_DESCRIPTOR: unknown index -> flash-count readout, else stall as before
+    Wrote superspeed-stock-wposinterpolation.hex:
+        complete image 0x8003800..0x800c928, 37160 bytes, 14040 bytes of flash left
+
+== Preset 2/5: QUICK (300) - quiet, full sweep every frame
+   output: superspeed-quick-wposinterpolation.hex
+   settings: Jump Rejection on, Movement Smoothing off, Startup Calibration on, Position Interpolation on, Aggressive Position Interpolation off, Hover Boost n/a, Reach Stage n/a, Long-range Pickup on, Dual-coil Mode off, Volatile Changes on, Bootloader Changes off, Bootloader Counter n/a
+   scan: one frame every 3333 us (300.0/s), 18 ADC samples and 30 excitation pulses per step, step tick 119 us, poll 10 us
+   frame budget: 2340 us scan + 130 us processing = 2470 us of 3333 us (863 us to spare)
+   fast stage pen thresholds: pick up above 300, drop below 200 (sweep 300/200; stock 300/200 for 45-sample readings)
+   long-range pickup: after 2 failed quick searches, searches use 254 pulses and 24 samples at the last tracked frequency -3..+3 (every 4th stays quick)
+   startup calibration: within 3 s of plugging in, one hard press (pressure >= 15500) starts it; it measures while the pen hovers or rests lightly (pressure < 500), ~4 s, LED blinking at 2.5 Hz; while paused by a press it scans at the best offset so far
+   jump rejection: momentum model - readings outside the pen's stop-to-coast corridor by more than the running noise + 1 mm are replaced by the predicted coast (at most 3 in a row, then let through)
+   version string (locked): AnargonSS727_20261103
+   changes:
+   0x0800398c: +44 bytes  software divide -> hardware UDIV (same results, div-by-zero behaviour kept)
+   0x080041c4:     4621 -> 0021     speed-adaptive deadband coefficient 70 -> 0
+   0x080041c6:     1922 -> 0022     speed-adaptive deadband coefficient 25 -> 0
+   0x080041ca:     3c21 -> 0021     speed-adaptive deadband coefficient 60 -> 0
+   0x080041ce:     3221 -> 0021     speed-adaptive deadband coefficient 50 -> 0
+   0x080041d2:     2d21 -> 0021     speed-adaptive deadband coefficient 45 -> 0
+   0x080041d6:     2821 -> 0021     speed-adaptive deadband coefficient 40 -> 0
+   0x080041da:     2321 -> 0021     speed-adaptive deadband coefficient 35 -> 0
+   0x080041de:     1e21 -> 0021     speed-adaptive deadband coefficient 30 -> 0
+   0x08004258:     1420 -> 0020     deadband floor 20 -> 0
+   0x08005302:     2d21 -> 1221     ADC samples/step 45 -> 18
+   0x0800710e:     2822 -> 1e22     excitation pulses/step 40 -> 30
+   0x08005da2:     3225 -> 0a25     step poll 50 -> 10 us
+   0x08005dac:     c820 -> 7720     step tick 200 -> 119 us
+   0x080075d6:     1e2a -> 102a     AGC delay cap 30 -> 16 (samples-2)
+   0x080075da:     1e22 -> 1022     AGC delay clamp 30 -> 16
+   0x0800c63b:       03 -> 01       EP81/EP82 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c658:       03 -> 01       EP83 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c7cc: +16 bytes  pressure-table index clamp (<= 74, from a 76-entry table)
+   0x0800762c: b0fbf1f1 -> 05f0ceb8 pressure index -> clamp
+   0x0800c7dc: +36 bytes  resonance band-edge hold (540-545 kHz -> 539.999 kHz)
+   0x08007656: 18445060 -> 05f0c1b8 resonance estimate -> band-edge hold
+   0x0800c800: +100 bytes  scheduler tables: hover-stage step profiles, tilt frames
+   0x0800c864: +2108 bytes  timer-paced scheduler: every 3333 us, hover stages fast, tilt over 2/4 frames, sweep full, long-range search
+   0x08009b64: 00209c39 -> 02f07efe X fine-scan start: line set per frame type
+   0x08009b88: 00204870 -> 02f076fe Y fine-scan start: line set per frame type
+   0x0800bbce: 491c5060 -> 00f05efe X line step: outer line 6 only when scheduled
+   0x0800bc12: 491c5060 -> 00f04afe Y line step: outer line 6 only when scheduled
+   0x0800bbde: fbf781be -> 00f072be X scan complete: cache outer lines
+   0x0800bc22: fbf7c1be -> 00f073be Y scan complete: cache outer lines
+   0x0800597e: 02490120 -> 07f036b8 sweep: pause at chunk boundary
+   0x08005966: 01f06bbf -> 07f060b8 sweep complete: pen state fresh
+   0x08007084: 08480022 -> 05f0dbbc frame restart: hover stage, plan, arm
+   0x08005d9c: 03f076fe -> 06f0adff step timer: start the armed frame on time
+   0x080040f4: 03f01cfd -> 08f02dfc pen-state processing only after a full sweep
+   0x080040f8: 03f0bcfa -> aff30080 (folded into the gate above)
+   0x0800412c: 03f06afa -> 08f01efc pressure only after a full sweep
+   0x08004136: 01f0a5fe -> 08f022fc tilt from cached outer lines, once per cycle
+   0x08006f50: 2de9f041 -> 05f007bf search restart: stages, long-range, probes
+   0x0800416a:     0220 -> 0020     frame done: report released by the scheduler
+   0x08005df6: 3e70c278 -> 07f01bf9 X scan frequency: resonance + calibrated offset
+   0x08005e08: 3e70c278 -> 07f012f9 Y scan frequency: resonance + calibrated offset
+   0x08004814: 03f056fe -> 08f0e0fb LED (PC13): blinks (2.5 Hz) while calibrating
+   0x0800710c: 0b781e22 -> 05f019ff pulses + samples per step kind (scan/sweep/search)
+   0x08005dac: 77202060 -> 07f0dbf8 step tick per step kind (scan/sweep/search)
+   0x08007876: b7f5967f -> 05f03cfb sweep pick-up threshold 300 -> per stage (drop in ip)
+   0x08007888:     c82f -> 6745     sweep drop threshold 200 -> per stage (cmp r7, ip)
+   0x08007928: b2f5967f -> 05f0f2fa X pick-up threshold 300 -> per stage (drop in ip)
+   0x0800793e:     c82a -> 6245     X drop threshold 200 -> per stage (cmp r2, ip)
+   0x080079de: 3289c82a -> 05f0a6fa Y drop threshold 200 -> per stage
+   0x08005dd8: 33f81000 -> 07f03af9 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x08005de6: 33f81000 -> 07f033f9 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x08006fde: 32f81110 -> 06f052f8 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x0800704a: 13f81000 -> 06f001f8 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x0800d0a0: +296 bytes  flash-count readout: USB string 173 ("ADTC1:<B|F|N>:<count>")
+   0x0800af72: fff7d1fd -> 02f095f8 GET_DESCRIPTOR: unknown index -> flash-count readout, else stall as before
+    Wrote superspeed-quick-wposinterpolation.hex:
+        complete image 0x8003800..0x800d1c8, 39368 bytes, 11832 bytes of flash left
+
+== Preset 3/5: FAST (500) - balanced
+   output: superspeed-fast-wposinterpolation.hex
+   settings: Jump Rejection on, Movement Smoothing off, Startup Calibration on, Position Interpolation on, Aggressive Position Interpolation off, Hover Boost on, Reach Stage on, Long-range Pickup on, Dual-coil Mode off, Volatile Changes on, Bootloader Changes off, Bootloader Counter n/a
+   scan: one frame every 2000 us (500.0/s), 10 ADC samples and 20 excitation pulses per step, step tick 84 us, poll 10 us
+   frame budget: 1520 us scan + 130 us processing = 1650 us of 2000 us (350 us to spare)
+   fast stage pen thresholds: pick up above 300, drop below 200 (sweep 300/200; stock 300/200 for 45-sample readings)
+   hover boost pen thresholds: pick up above 300, drop below 200 (sweep 300/200; stock 300/200 for 45-sample readings)
+   reach stage pen thresholds: pick up above 300, drop below 200 (sweep 300/200; stock 300/200 for 45-sample readings)
+   hover boost: one frame every 4000 us with 32 samples and 40 pulses
+   reach stage: one frame every 16000 us with 24 samples and 254 pulses
+   stages: weak (level < 1600) for 24 frames -> boost; half the boost level for 12 frames -> reach; a faster stage is tried every 16 boost / 2 reach frames once the level rose 25% and kept if it reads strong enough; the AGC delaying or a touch steps up at once
+   long-range pickup: after 2 failed quick searches, searches use 254 pulses and 24 samples at the last tracked frequency -3..+3 (every 4th stays quick)
+   startup calibration: within 3 s of plugging in, one hard press (pressure >= 15500) starts it; it measures while the pen hovers or rests lightly (pressure < 500), ~4 s, LED blinking at 2.5 Hz; while paused by a press it scans at the best offset so far
+   jump rejection: momentum model - readings outside the pen's stop-to-coast corridor by more than the running noise + 1 mm are replaced by the predicted coast (at most 3 in a row, then let through)
+   version string (locked): AnargonSS727_20261103
+   changes:
+   0x0800398c: +44 bytes  software divide -> hardware UDIV (same results, div-by-zero behaviour kept)
+   0x080041c4:     4621 -> 0021     speed-adaptive deadband coefficient 70 -> 0
+   0x080041c6:     1922 -> 0022     speed-adaptive deadband coefficient 25 -> 0
+   0x080041ca:     3c21 -> 0021     speed-adaptive deadband coefficient 60 -> 0
+   0x080041ce:     3221 -> 0021     speed-adaptive deadband coefficient 50 -> 0
+   0x080041d2:     2d21 -> 0021     speed-adaptive deadband coefficient 45 -> 0
+   0x080041d6:     2821 -> 0021     speed-adaptive deadband coefficient 40 -> 0
+   0x080041da:     2321 -> 0021     speed-adaptive deadband coefficient 35 -> 0
+   0x080041de:     1e21 -> 0021     speed-adaptive deadband coefficient 30 -> 0
+   0x08004258:     1420 -> 0020     deadband floor 20 -> 0
+   0x08005302:     2d21 -> 0a21     ADC samples/step 45 -> 10
+   0x0800710e:     2822 -> 1422     excitation pulses/step 40 -> 20
+   0x08005da2:     3225 -> 0a25     step poll 50 -> 10 us
+   0x08005dac:     c820 -> 5420     step tick 200 -> 84 us
+   0x080075d6:     1e2a -> 082a     AGC delay cap 30 -> 8 (samples-2)
+   0x080075da:     1e22 -> 0822     AGC delay clamp 30 -> 8
+   0x0800c63b:       03 -> 01       EP81/EP82 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c658:       03 -> 01       EP83 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c7cc: +16 bytes  pressure-table index clamp (<= 74, from a 76-entry table)
+   0x0800762c: b0fbf1f1 -> 05f0ceb8 pressure index -> clamp
+   0x0800c7dc: +36 bytes  resonance band-edge hold (540-545 kHz -> 539.999 kHz)
+   0x08007656: 18445060 -> 05f0c1b8 resonance estimate -> band-edge hold
+   0x0800c800: +100 bytes  scheduler tables: hover-stage step profiles, tilt frames
+   0x0800c864: +2612 bytes  SOF-locked scheduler: every 2000 us, hover stages fast + boost + reach, tilt over 2/8 frames, sweep full, long-range search
+   0x08009b64: 00209c39 -> 02f07efe X fine-scan start: line set per frame type
+   0x08009b88: 00204870 -> 02f076fe Y fine-scan start: line set per frame type
+   0x0800bbce: 491c5060 -> 00f05efe X line step: outer line 6 only when scheduled
+   0x0800bc12: 491c5060 -> 00f04afe Y line step: outer line 6 only when scheduled
+   0x0800bbde: fbf781be -> 00f072be X scan complete: cache outer lines
+   0x0800bc22: fbf7c1be -> 00f073be Y scan complete: cache outer lines
+   0x0800597e: 02490120 -> 07f036b8 sweep: pause at chunk boundary
+   0x08005966: 01f06bbf -> 07f060b8 sweep complete: pen state fresh
+   0x08007084: 08480022 -> 05f0dbbc frame restart: hover stage, plan, arm
+   0x08005d9c: 03f076fe -> 07f097f8 step timer: start the armed frame on time
+   0x080040f4: 03f01cfd -> 08f02dfc pen-state processing only after a full sweep
+   0x080040f8: 03f0bcfa -> aff30080 (folded into the gate above)
+   0x0800412c: 03f06afa -> 08f01efc pressure only after a full sweep
+   0x08004136: 01f0a5fe -> 08f022fc tilt from cached outer lines, once per cycle
+   0x08006f50: 2de9f041 -> 06f000b8 search restart: stages, long-range, probes
+   0x0800416a:     0220 -> 0020     frame done: report released by the scheduler
+   0x08005df6: 3e70c278 -> 07f017fa X scan frequency: resonance + calibrated offset
+   0x08005e08: 3e70c278 -> 07f00efa Y scan frequency: resonance + calibrated offset
+   0x08004814: 03f056fe -> 08f0dcfc LED (PC13): blinks (2.5 Hz) while calibrating
+   0x0800710c: 0b781422 -> 06f015f8 pulses + samples per step kind (scan/sweep/search)
+   0x08005dac: 54202060 -> 07f0d7f9 step tick per step kind (scan/sweep/search)
+   0x08007876: b7f5967f -> 05f026fc sweep pick-up threshold 300 -> per stage (drop in ip)
+   0x08007888:     c82f -> 6745     sweep drop threshold 200 -> per stage (cmp r7, ip)
+   0x08007928: b2f5967f -> 05f0dcfb X pick-up threshold 300 -> per stage (drop in ip)
+   0x0800793e:     c82a -> 6245     X drop threshold 200 -> per stage (cmp r2, ip)
+   0x080079de: 3289c82a -> 05f090fb Y drop threshold 200 -> per stage
+   0x08005dd8: 33f81000 -> 07f036fa search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x08005de6: 33f81000 -> 07f02ffa search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x08006fde: 32f81110 -> 06f04ef9 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x0800704a: 13f81000 -> 06f0fdf8 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x0800d298: +296 bytes  flash-count readout: USB string 173 ("ADTC1:<B|F|N>:<count>")
+   0x0800af72: fff7d1fd -> 02f091f9 GET_DESCRIPTOR: unknown index -> flash-count readout, else stall as before
+    Wrote superspeed-fast-wposinterpolation.hex:
+        complete image 0x8003800..0x800d3c0, 39872 bytes, 11328 bytes of flash left
+
+== Preset 4/5: RAPID (800) - sweep spread over 2 frames
+   output: superspeed-rapid-wposinterpolation.hex
+   settings: Jump Rejection on, Movement Smoothing off, Startup Calibration on, Position Interpolation on, Aggressive Position Interpolation off, Hover Boost on, Reach Stage on, Long-range Pickup on, Dual-coil Mode off, Volatile Changes on, Bootloader Changes off, Bootloader Counter n/a
+   scan: one frame every 1250 us (800.0/s), 5 ADC samples and 18 excitation pulses per step, step tick 71 us, poll 10 us
+   frame budget: 1066 us scan + 130 us processing = 1196 us of 1250 us (54 us to spare)
+   fast stage pen thresholds: pick up above 135, drop below 90 (sweep 135/90; stock 300/200 for 45-sample readings)
+   hover boost pen thresholds: pick up above 300, drop below 200 (sweep 300/200; stock 300/200 for 45-sample readings)
+   reach stage pen thresholds: pick up above 300, drop below 200 (sweep 300/200; stock 300/200 for 45-sample readings)
+   hover boost: one frame every 2500 us with 24 samples and 40 pulses
+   reach stage: one frame every 16667 us with 24 samples and 254 pulses
+   stages: weak (level < 720) for 24 frames -> boost; half the boost level for 12 frames -> reach; a faster stage is tried every 16 boost / 2 reach frames once the level rose 25% and kept if it reads strong enough; the AGC delaying or a touch steps up at once
+   long-range pickup: after 2 failed quick searches, searches use 254 pulses and 24 samples at the last tracked frequency -3..+3 (every 4th stays quick)
+   startup calibration: within 3 s of plugging in, one hard press (pressure >= 15500) starts it; it measures while the pen hovers or rests lightly (pressure < 500), ~4 s, LED blinking at 2.5 Hz; while paused by a press it scans at the best offset so far
+   jump rejection: momentum model - readings outside the pen's stop-to-coast corridor by more than the running noise + 1 mm are replaced by the predicted coast (at most 3 in a row, then let through)
+   version string (locked): AnargonSS727_20261103
+   changes:
+   0x0800398c: +44 bytes  software divide -> hardware UDIV (same results, div-by-zero behaviour kept)
+   0x080041c4:     4621 -> 0021     speed-adaptive deadband coefficient 70 -> 0
+   0x080041c6:     1922 -> 0022     speed-adaptive deadband coefficient 25 -> 0
+   0x080041ca:     3c21 -> 0021     speed-adaptive deadband coefficient 60 -> 0
+   0x080041ce:     3221 -> 0021     speed-adaptive deadband coefficient 50 -> 0
+   0x080041d2:     2d21 -> 0021     speed-adaptive deadband coefficient 45 -> 0
+   0x080041d6:     2821 -> 0021     speed-adaptive deadband coefficient 40 -> 0
+   0x080041da:     2321 -> 0021     speed-adaptive deadband coefficient 35 -> 0
+   0x080041de:     1e21 -> 0021     speed-adaptive deadband coefficient 30 -> 0
+   0x08004258:     1420 -> 0020     deadband floor 20 -> 0
+   0x08005302:     2d21 -> 0521     ADC samples/step 45 -> 5
+   0x0800710e:     2822 -> 1222     excitation pulses/step 40 -> 18
+   0x08005da2:     3225 -> 0a25     step poll 50 -> 10 us
+   0x08005dac:     c820 -> 4720     step tick 200 -> 71 us
+   0x080075d6:     1e2a -> 032a     AGC delay cap 30 -> 3 (samples-2)
+   0x080075da:     1e22 -> 0322     AGC delay clamp 30 -> 3
+   0x0800c63b:       03 -> 01       EP81/EP82 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c658:       03 -> 01       EP83 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c7cc: +16 bytes  pressure-table index clamp (<= 74, from a 76-entry table)
+   0x0800762c: b0fbf1f1 -> 05f0ceb8 pressure index -> clamp
+   0x0800c7dc: +36 bytes  resonance band-edge hold (540-545 kHz -> 539.999 kHz)
+   0x08007656: 18445060 -> 05f0c1b8 resonance estimate -> band-edge hold
+   0x0800c800: +100 bytes  scheduler tables: hover-stage step profiles, tilt frames
+   0x0800c864: +2668 bytes  timer-paced scheduler: every 1250 us, hover stages fast + boost + reach, tilt over 2/8 frames, sweep chunk 3, long-range search
+   0x08009b64: 00209c39 -> 02f07efe X fine-scan start: line set per frame type
+   0x08009b88: 00204870 -> 02f076fe Y fine-scan start: line set per frame type
+   0x0800bbce: 491c5060 -> 00f05efe X line step: outer line 6 only when scheduled
+   0x0800bc12: 491c5060 -> 00f04afe Y line step: outer line 6 only when scheduled
+   0x0800bbde: fbf781be -> 00f072be X scan complete: cache outer lines
+   0x0800bc22: fbf7c1be -> 00f073be Y scan complete: cache outer lines
+   0x0800597e: 02490120 -> 07f036b8 sweep: pause at chunk boundary
+   0x08005966: 01f06bbf -> 07f060b8 sweep complete: pen state fresh
+   0x08007084: 08480022 -> 05f0dbbc frame restart: hover stage, plan, arm
+   0x08005d9c: 03f076fe -> 07f0a8f8 step timer: start the armed frame on time
+   0x080040f4: 03f01cfd -> 08f02dfc pen-state processing only after a full sweep
+   0x080040f8: 03f0bcfa -> aff30080 (folded into the gate above)
+   0x0800412c: 03f06afa -> 08f01efc pressure only after a full sweep
+   0x08004136: 01f0a5fe -> 08f022fc tilt from cached outer lines, once per cycle
+   0x08006f50: 2de9f041 -> 06f002b8 search restart: stages, long-range, probes
+   0x0800416a:     0220 -> 0020     frame done: report released by the scheduler
+   0x08005df6: 3e70c278 -> 07f032fa X scan frequency: resonance + calibrated offset
+   0x08005e08: 3e70c278 -> 07f029fa Y scan frequency: resonance + calibrated offset
+   0x08004814: 03f056fe -> 08f0f7fc LED (PC13): blinks (2.5 Hz) while calibrating
+   0x0800710c: 0b781222 -> 06f030f8 pulses + samples per step kind (scan/sweep/search)
+   0x08005dac: 47202060 -> 07f0f2f9 step tick per step kind (scan/sweep/search)
+   0x08007876: b7f5967f -> 05f041fc sweep pick-up threshold 300 -> per stage (drop in ip)
+   0x08007888:     c82f -> 6745     sweep drop threshold 200 -> per stage (cmp r7, ip)
+   0x08007928: b2f5967f -> 05f0f7fb X pick-up threshold 300 -> per stage (drop in ip)
+   0x0800793e:     c82a -> 6245     X drop threshold 200 -> per stage (cmp r2, ip)
+   0x080079de: 3289c82a -> 05f0abfb Y drop threshold 200 -> per stage
+   0x08005dd8: 33f81000 -> 07f051fa search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x08005de6: 33f81000 -> 07f04afa search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x08006fde: 32f81110 -> 06f069f9 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x0800704a: 13f81000 -> 06f018f9 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x0800d2d0: +296 bytes  flash-count readout: USB string 173 ("ADTC1:<B|F|N>:<count>")
+   0x0800af72: fff7d1fd -> 02f0adf9 GET_DESCRIPTOR: unknown index -> flash-count readout, else stall as before
+    Wrote superspeed-rapid-wposinterpolation.hex:
+        complete image 0x8003800..0x800d3f8, 39928 bytes, 11272 bytes of flash left
+
+== Preset 5/5: ULTRA (1000) - lowest latency, noisiest, sweep spread over 6 frames
+   output: superspeed-ultra-wposinterpolation.hex
+   settings: Jump Rejection on, Movement Smoothing off, Startup Calibration on, Position Interpolation on, Aggressive Position Interpolation off, Hover Boost on, Reach Stage on, Long-range Pickup on, Dual-coil Mode off, Volatile Changes on, Bootloader Changes off, Bootloader Counter n/a
+   scan: one frame every 1000 us (1000.0/s), 4 ADC samples and 16 excitation pulses per step, step tick 65 us, poll 10 us
+   frequency-sweep steps: 8 samples, 16 pulses (longer readings keep the pen frequency, and so the pressure, accurate)
+   frame budget: 844 us scan + 130 us processing = 974 us of 1000 us (26 us to spare)
+   fast stage pen thresholds: pick up above 96, drop below 64 (sweep 192/128; stock 300/200 for 45-sample readings)
+   hover boost pen thresholds: pick up above 300, drop below 200 (sweep 300/200; stock 300/200 for 45-sample readings)
+   reach stage pen thresholds: pick up above 300, drop below 200 (sweep 300/200; stock 300/200 for 45-sample readings)
+   hover boost: one frame every 2000 us with 20 samples and 40 pulses
+   reach stage: one frame every 16000 us with 24 samples and 254 pulses
+   stages: weak (level < 512) for 24 frames -> boost; half the boost level for 12 frames -> reach; a faster stage is tried every 16 boost / 2 reach frames once the level rose 25% and kept if it reads strong enough; the AGC delaying or a touch steps up at once
+   long-range pickup: after 2 failed quick searches, searches use 254 pulses and 24 samples at the last tracked frequency -3..+3 (every 4th stays quick)
+   startup calibration: within 3 s of plugging in, one hard press (pressure >= 15500) starts it; it measures while the pen hovers or rests lightly (pressure < 500), ~4 s, LED blinking at 2.5 Hz; while paused by a press it scans at the best offset so far
+   jump rejection: momentum model - readings outside the pen's stop-to-coast corridor by more than the running noise + 1 mm are replaced by the predicted coast (at most 3 in a row, then let through)
+   version string (locked): AnargonSS727_20261103
+   changes:
+   0x0800398c: +44 bytes  software divide -> hardware UDIV (same results, div-by-zero behaviour kept)
+   0x080041c4:     4621 -> 0021     speed-adaptive deadband coefficient 70 -> 0
+   0x080041c6:     1922 -> 0022     speed-adaptive deadband coefficient 25 -> 0
+   0x080041ca:     3c21 -> 0021     speed-adaptive deadband coefficient 60 -> 0
+   0x080041ce:     3221 -> 0021     speed-adaptive deadband coefficient 50 -> 0
+   0x080041d2:     2d21 -> 0021     speed-adaptive deadband coefficient 45 -> 0
+   0x080041d6:     2821 -> 0021     speed-adaptive deadband coefficient 40 -> 0
+   0x080041da:     2321 -> 0021     speed-adaptive deadband coefficient 35 -> 0
+   0x080041de:     1e21 -> 0021     speed-adaptive deadband coefficient 30 -> 0
+   0x08004258:     1420 -> 0020     deadband floor 20 -> 0
+   0x08005302:     2d21 -> 0421     ADC samples/step 45 -> 4
+   0x0800710e:     2822 -> 1022     excitation pulses/step 40 -> 16
+   0x08005da2:     3225 -> 0a25     step poll 50 -> 10 us
+   0x08005dac:     c820 -> 4120     step tick 200 -> 65 us
+   0x080075d6:     1e2a -> 022a     AGC delay cap 30 -> 2 (samples-2)
+   0x080075da:     1e22 -> 0222     AGC delay clamp 30 -> 2
+   0x0800c63b:       03 -> 01       EP81/EP82 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c658:       03 -> 01       EP83 bInterval 3 -> 1 ms (compressed .data literal)
+   0x0800c7cc: +16 bytes  pressure-table index clamp (<= 74, from a 76-entry table)
+   0x0800762c: b0fbf1f1 -> 05f0ceb8 pressure index -> clamp
+   0x0800c7dc: +36 bytes  resonance band-edge hold (540-545 kHz -> 539.999 kHz)
+   0x08007656: 18445060 -> 05f0c1b8 resonance estimate -> band-edge hold
+   0x0800c800: +100 bytes  scheduler tables: hover-stage step profiles, tilt frames
+   0x0800c864: +2648 bytes  SOF-locked scheduler: every 1000 us, hover stages fast + boost + reach, tilt over 4/16 frames, sweep chunk 1, long-range search
+   0x08009b64: 00209c39 -> 02f07efe X fine-scan start: line set per frame type
+   0x08009b88: 00204870 -> 02f076fe Y fine-scan start: line set per frame type
+   0x0800bbce: 491c5060 -> 00f05efe X line step: outer line 6 only when scheduled
+   0x0800bc12: 491c5060 -> 00f04afe Y line step: outer line 6 only when scheduled
+   0x0800bbde: fbf781be -> 00f072be X scan complete: cache outer lines
+   0x0800bc22: fbf7c1be -> 00f073be Y scan complete: cache outer lines
+   0x0800597e: 02490120 -> 07f036b8 sweep: pause at chunk boundary
+   0x08005966: 01f06bbf -> 07f060b8 sweep complete: pen state fresh
+   0x08007084: 08480022 -> 05f0dbbc frame restart: hover stage, plan, arm
+   0x08005d9c: 03f076fe -> 07f0a5f8 step timer: start the armed frame on time
+   0x080040f4: 03f01cfd -> 08f02dfc pen-state processing only after a full sweep
+   0x080040f8: 03f0bcfa -> aff30080 (folded into the gate above)
+   0x0800412c: 03f06afa -> 08f01efc pressure only after a full sweep
+   0x08004136: 01f0a5fe -> 08f022fc tilt from cached outer lines, once per cycle
+   0x08006f50: 2de9f041 -> 06f00eb8 search restart: stages, long-range, probes
+   0x0800416a:     0220 -> 0020     frame done: report released by the scheduler
+   0x08005df6: 3e70c278 -> 07f028fa X scan frequency: resonance + calibrated offset
+   0x08005e08: 3e70c278 -> 07f01ffa Y scan frequency: resonance + calibrated offset
+   0x08004814: 03f056fe -> 08f0edfc LED (PC13): blinks (2.5 Hz) while calibrating
+   0x0800710c: 0b781022 -> 06f026f8 pulses + samples per step kind (scan/sweep/search)
+   0x08005dac: 41202060 -> 07f0e8f9 step tick per step kind (scan/sweep/search)
+   0x08007876: b7f5967f -> 05f037fc sweep pick-up threshold 300 -> per stage (drop in ip)
+   0x08007888:     c82f -> 6745     sweep drop threshold 200 -> per stage (cmp r7, ip)
+   0x08007928: b2f5967f -> 05f0edfb X pick-up threshold 300 -> per stage (drop in ip)
+   0x0800793e:     c82a -> 6245     X drop threshold 200 -> per stage (cmp r2, ip)
+   0x080079de: 3289c82a -> 05f0a1fb Y drop threshold 200 -> per stage
+   0x08005dd8: 33f81000 -> 07f047fa search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x08005de6: 33f81000 -> 07f040fa search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x08006fde: 32f81110 -> 06f05ff9 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x0800704a: 13f81000 -> 06f00ef9 search probe -> frequency index (stock list, or last frequency -3..+3)
+   0x0800d2bc: +296 bytes  flash-count readout: USB string 173 ("ADTC1:<B|F|N>:<count>")
+   0x0800af72: fff7d1fd -> 02f0a3f9 GET_DESCRIPTOR: unknown index -> flash-count readout, else stall as before
+    Wrote superspeed-ultra-wposinterpolation.hex:
+        complete image 0x8003800..0x800d3e4, 39908 bytes, 11292 bytes of flash left

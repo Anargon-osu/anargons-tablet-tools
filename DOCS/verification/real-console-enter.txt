@@ -1,0 +1,64 @@
+PASS: 12 real-console Enter prompts at 48 columns, including wrapped warnings and scrolling.
+
+Reproducible harness:
+import os
+from pathlib import Path
+import subprocess
+import tempfile
+
+root = Path(__file__).resolve().parent.parent / 'release/anargons-deco640-tools'
+code = r'''
+using System;
+using System.IO;
+using System.Threading;
+using System.Runtime.InteropServices;
+using AnargonsDeco640Tools;
+using Gd32Emu;
+class ConsoleProbe {
+ [StructLayout(LayoutKind.Explicit, Size=20)] struct Input {
+  [FieldOffset(0)] public short type;
+  [FieldOffset(4)] public int down;
+  [FieldOffset(8)] public short repeats;
+  [FieldOffset(10)] public short key;
+  [FieldOffset(14)] public char character;
+ }
+ [DllImport("kernel32.dll")] static extern IntPtr GetStdHandle(int id);
+ [DllImport("kernel32.dll", EntryPoint="WriteConsoleInputW", SetLastError=true)]
+ static extern bool WriteInput(IntPtr handle, Input[] data, int size, out int written);
+ static int Main(string[] args) {
+  try {
+   Console.SetWindowSize(48, 16); Console.SetBufferSize(48, 60);
+   Screen.wipe=false;
+   Screen.Warn("Backup: put xppen-tools next to this program before flashing. This long warning wraps across several console rows.");
+   Screen.Warn("Recorded updates: 6. Keep the tablet connected while an update is running.");
+   for (int i=0;i<12;i++) {
+    Thread input = new Thread(delegate() {
+     Thread.Sleep(80);
+     Input k = new Input(); k.type=1; k.down=1; k.repeats=1; k.key=13; k.character='\r';
+     int count; if (!WriteInput(GetStdHandle(-10),new Input[]{k},1,out count)) Environment.Exit(4);
+    });
+    input.Start();
+    string answer=Screen.Ask("Type 1-6 (Enter = 3) > "); input.Join();
+    if (answer!="" || P.InputEnded()) throw new Exception("Enter did not produce an empty answer");
+   }
+   File.WriteAllText(args[0],"PASS: 12 real-console Enter prompts at 48 columns, including wrapped warnings and scrolling.\n");
+   return 0;
+  } catch(Exception e) { File.WriteAllText(args[0],e.ToString()); return 1; }
+ }
+}
+'''
+with tempfile.TemporaryDirectory(prefix='r37-console-') as folder:
+    work = Path(folder)
+    source = work / 'probe.cs'
+    source.write_text(code)
+    exe = work / 'probe.exe'
+    compiler = Path(os.environ['WINDIR']) / 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
+    subprocess.run([str(compiler), '/nologo', '/langversion:5', '/main:ConsoleProbe', '/out:' + str(exe),
+                    str(root/'gd32emu/gd32emu.cs'), *map(str, sorted((root/'app').glob('atf_*.cs'))), str(source)], check=True)
+    startup = subprocess.STARTUPINFO()
+    startup.dwFlags = subprocess.STARTF_USESHOWWINDOW
+    startup.wShowWindow = 0
+    result = work / 'result.txt'
+    subprocess.run([str(exe), str(result)], creationflags=subprocess.CREATE_NEW_CONSOLE,
+                   startupinfo=startup, timeout=30, check=True)
+    print(result.read_text(), end='')

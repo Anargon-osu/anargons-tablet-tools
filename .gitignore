@@ -1,0 +1,26 @@
+# local settings (copy .env.example)
+.env
+# build output
+bin/
+obj/
+.publish/
+/AnargonsTabletTools
+/AnargonsTabletTools.exe
+# tablet data: dumps, backups and anything read from a tablet stay on your PC
+*.bin
+dumps/
+last-dump/
+backups/
+calibration-*.txt
+*-repair-report.txt
+# run logs and outputs (builds/ keeps the shipped presets)
+/main-*.log
+/verbose-*.log
+/*.hex
+tests/work/
+calibration-regressions-work/
+cal-work/
+/packages/
+tests/__pycache__/
+packages/
+tools/__pycache__/

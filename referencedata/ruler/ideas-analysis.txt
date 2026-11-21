@@ -1,0 +1,97 @@
+line at 33.07 deg through (67.2, 40.1) mm (all six); sideways = -0.546 X +0.838 Y
+common stretch: -63.2 to 70.8 mm along the line (134 mm), covered by 3+ passes each way in all six; pass speeds 0-9999 mm/s
+   rc5 control          pass speeds (mm/s): 17 22 25 24 35 25 20 7 50
+   Coil Linearization   pass speeds (mm/s): 29 36 42 36 37 34 32 38 39 47 62 46 44 47 49 45 43
+   Pen-Anchored         pass speeds (mm/s): 55 53 72 59 78 73 106 93 107 90 89 93 83 71 95 55 72 65 37 31
+   Midpoint Gauss       pass speeds (mm/s): 45 43 49 70 55 79 67 48 42 48 48 56 71 55 68 60 71 40 67 53 86 65 74
+   Cross-Axis           pass speeds (mm/s): 65 70 76 102 60 53 47 83 109 192 103 132 108 155 59 119 128 62 110 111 73 108 105 101 126 82 111 91 92 105 144 69 93 67 99 105 108 116 97
+   Alt. Blend           pass speeds (mm/s): 126 85 99 112 146 112 80 167 207 150 134 129 76 154 189 219 92 176 169 37 165 164 166 162 161 203 81 228 165 186 208 142 161 226 118 151 172 161 146 166 30 141 90 205 83 187 129 128 177
+
+== rc5 control (i1-control): 9 passes (5 +, 4 -), speed median 24 mm/s, pressure median 16311 (10-90 % 10210-16383), frames 1 ms apart 100.0 %
+   direction +1: repeatable p-p 0.659 mm; slow p-p 0.272; coil-scale p-p 0.468, sd 0.093; pass scatter sd 0.109
+   direction -1: repeatable p-p 1.131 mm; slow p-p 0.769; coil-scale p-p 0.581, sd 0.110; pass scatter sd 0.126
+   forward minus back (coil-scale): max 0.188 mm, rms 0.069
+   coil-locked: X phase p-p 0.157 mm sideways (X error about 0.287), Y phase p-p 0.119 (Y error about 0.142); rms 0.096 -> 0.073 after both
+      X phase 0..15/16: +0.00 -0.02 -0.03 -0.05 -0.06 -0.08 -0.04 -0.04 -0.02 -0.01 +0.04 +0.05 +0.08 +0.06 +0.05 +0.01
+      Y phase 0..15/16: +0.03 +0.04 +0.06 +0.06 +0.06 +0.01 -0.02 -0.04 -0.05 -0.06 -0.06 -0.05 -0.02 +0.00 +0.01 +0.03
+   breaks inside a pass: 11 (tip off 0 of them,  ms; pressure before / after median 0 / 0); report gaps over 3 ms with the tip down: 11
+   X: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 7 (0.1/s, median 0.62), bursts 0
+   Y: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 1 (0.0/s, median 0.93), bursts 0
+
+== Coil Linearization (i2-cl): 17 passes (9 +, 8 -), speed median 42 mm/s, pressure median 16383 (10-90 % 12331-16383), frames 1 ms apart 99.9 %
+   direction +1: repeatable p-p 0.720 mm; slow p-p 0.437; coil-scale p-p 0.434, sd 0.088; pass scatter sd 0.125
+   direction -1: repeatable p-p 1.505 mm; slow p-p 1.089; coil-scale p-p 0.600, sd 0.117; pass scatter sd 0.183
+   forward minus back (coil-scale): max 0.224 mm, rms 0.081
+   coil-locked: X phase p-p 0.066 mm sideways (X error about 0.121), Y phase p-p 0.071 (Y error about 0.084); rms 0.095 -> 0.090 after both
+      X phase 0..15/16: -0.02 -0.02 -0.04 -0.03 -0.03 -0.03 -0.02 -0.01 -0.00 +0.01 +0.02 +0.03 +0.03 +0.03 +0.01 -0.00
+      Y phase 0..15/16: -0.02 -0.00 +0.01 +0.02 +0.03 +0.01 +0.01 +0.03 +0.01 +0.01 +0.01 -0.01 -0.02 -0.04 -0.03 -0.02
+   breaks inside a pass: 28 (tip off 6 of them, 13/13/2/121/13/247 ms; pressure before / after median 2319 / 4220); report gaps over 3 ms with the tip down: 22
+   X: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 6 (0.1/s, median 1.38), bursts 1
+   Y: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 1 (0.0/s, median 1.23), bursts 0
+
+== Pen-Anchored (i3-pax): 20 passes (10 +, 10 -), speed median 73 mm/s, pressure median 16383 (10-90 % 14308-16383), frames 1 ms apart 100.0 %
+   direction +1: repeatable p-p 1.048 mm; slow p-p 0.398; coil-scale p-p 0.959, sd 0.206; pass scatter sd 0.142
+   direction -1: repeatable p-p 1.363 mm; slow p-p 0.663; coil-scale p-p 1.029, sd 0.218; pass scatter sd 0.139
+   forward minus back (coil-scale): max 0.499 mm, rms 0.157
+   coil-locked: X phase p-p 0.229 mm sideways (X error about 0.420), Y phase p-p 0.269 (Y error about 0.322); rms 0.197 -> 0.162 after both
+      X phase 0..15/16: -0.03 -0.01 -0.08 -0.07 -0.12 -0.10 -0.10 -0.05 -0.02 +0.06 +0.07 +0.11 +0.08 +0.10 +0.04 +0.04
+      Y phase 0..15/16: +0.04 +0.08 +0.10 +0.11 +0.13 +0.06 +0.01 -0.04 -0.13 -0.13 -0.11 -0.10 -0.03 +0.00 -0.00 +0.03
+   breaks inside a pass: 25 (tip off 5 of them, 13/13/12/13/15 ms; pressure before / after median 608 / 1093); report gaps over 3 ms with the tip down: 20
+   X: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 44 (1.0/s, median 0.79), bursts 1
+   Y: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 6 (0.1/s, median 1.31), bursts 1
+
+== Midpoint Gauss (i4-mg): 23 passes (10 +, 13 -), speed median 56 mm/s, pressure median 16383 (10-90 % 12069-16383), frames 1 ms apart 100.0 %
+   direction +1: repeatable p-p 1.645 mm; slow p-p 0.485; coil-scale p-p 1.659, sd 0.314; pass scatter sd 0.251
+   direction -1: repeatable p-p 1.561 mm; slow p-p 0.533; coil-scale p-p 1.397, sd 0.277; pass scatter sd 0.254
+   forward minus back (coil-scale): max 0.671 mm, rms 0.185
+   coil-locked: X phase p-p 0.310 mm sideways (X error about 0.567), Y phase p-p 0.491 (Y error about 0.586); rms 0.281 -> 0.221 after both
+      X phase 0..15/16: -0.00 -0.02 -0.13 -0.09 -0.12 -0.09 -0.12 -0.06 -0.06 +0.00 +0.03 +0.10 +0.14 +0.18 +0.13 +0.07
+      Y phase 0..15/16: +0.01 +0.19 +0.21 +0.19 +0.19 +0.10 +0.07 +0.06 -0.02 -0.03 -0.04 -0.13 -0.12 -0.21 -0.28 -0.14
+   breaks inside a pass: 26 (tip off 3 of them, 13/13/14 ms; pressure before / after median 310 / 950); report gaps over 3 ms with the tip down: 23
+   X: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 407 (6.9/s, median 2.02), bursts 7
+   Y: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 290 (4.9/s, median 1.85), bursts 16
+
+== Cross-Axis (i5-xa): 39 passes (19 +, 20 -), speed median 102 mm/s, pressure median 16383 (10-90 % 16383-16383), frames 1 ms apart 99.9 %
+   direction +1: repeatable p-p 0.842 mm; slow p-p 0.436; coil-scale p-p 0.747, sd 0.140; pass scatter sd 0.159
+   direction -1: repeatable p-p 0.796 mm; slow p-p 0.373; coil-scale p-p 0.751, sd 0.150; pass scatter sd 0.131
+   forward minus back (coil-scale): max 0.312 mm, rms 0.133
+   coil-locked: X phase p-p 0.109 mm sideways (X error about 0.200), Y phase p-p 0.122 (Y error about 0.145); rms 0.129 -> 0.119 after both
+      X phase 0..15/16: -0.02 +0.00 -0.06 -0.02 -0.05 -0.04 -0.04 -0.02 -0.02 +0.02 +0.02 +0.05 +0.03 +0.05 +0.02 +0.03
+      Y phase 0..15/16: +0.01 +0.03 +0.03 +0.05 +0.06 +0.03 +0.03 +0.02 -0.02 -0.03 -0.03 -0.06 -0.04 -0.04 -0.03 +0.00
+   breaks inside a pass: 48 (tip off 10 of them, 361/267/236/328/392/55/384/261 ms; pressure before / after median 8 / 582); report gaps over 3 ms with the tip down: 38
+   X: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 20 (0.4/s, median 0.65), bursts 0
+   Y: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 0 (0.0/s, median nan), bursts 0
+
+== Alt. Blend (i6-ab): 49 passes (25 +, 24 -), speed median 154 mm/s, pressure median 16383 (10-90 % 15697-16383), frames 1 ms apart 99.9 %
+   direction +1: repeatable p-p 1.101 mm; slow p-p 0.397; coil-scale p-p 1.031, sd 0.210; pass scatter sd 0.154
+   direction -1: repeatable p-p 1.007 mm; slow p-p 0.365; coil-scale p-p 0.915, sd 0.172; pass scatter sd 0.238
+   forward minus back (coil-scale): max 0.354 mm, rms 0.141
+   coil-locked: X phase p-p 0.276 mm sideways (X error about 0.506), Y phase p-p 0.284 (Y error about 0.339); rms 0.178 -> 0.121 after both
+      X phase 0..15/16: -0.04 -0.04 -0.12 -0.12 -0.15 -0.11 -0.07 -0.01 +0.04 +0.10 +0.11 +0.13 +0.09 +0.09 +0.04 +0.03
+      Y phase 0..15/16: -0.05 -0.04 -0.01 +0.09 +0.18 +0.18 +0.14 +0.06 -0.04 -0.07 -0.07 -0.10 -0.08 -0.07 -0.07 -0.04
+   breaks inside a pass: 76 (tip off 25 of them, 283/296/375/23/383/327/267/322 ms; pressure before / after median 9 / 4593); report gaps over 3 ms with the tip down: 51
+   X: flicks 3 (0.1/s, median 0.33 mm, 0 % at a coil midpoint +-0.15), steps 444 (8.5/s, median 1.54), bursts 43
+      flicks by X coil phase (0 = coil centre, 0.5 = midpoint), tenths: 1 0 1 1 0 0 0 0 0 0
+   Y: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 341 (6.5/s, median 1.65), bursts 56
+
+== same spot in other recordings (within 1 mm along the line): steps and bursts, then flicks
+   rc5 control          steps+bursts    8, of them at a spot shared with 3+ other recordings: 3
+   rc5 control          flicks          0, of them at a spot shared with 3+ other recordings: 0
+   Coil Linearization   steps+bursts    8, of them at a spot shared with 3+ other recordings: 4
+   Coil Linearization   flicks          0, of them at a spot shared with 3+ other recordings: 0
+   Pen-Anchored         steps+bursts   52, of them at a spot shared with 3+ other recordings: 18
+   Pen-Anchored         flicks          0, of them at a spot shared with 3+ other recordings: 0
+   Midpoint Gauss       steps+bursts  720, of them at a spot shared with 3+ other recordings: 114
+   Midpoint Gauss       flicks          0, of them at a spot shared with 3+ other recordings: 0
+   Cross-Axis           steps+bursts   20, of them at a spot shared with 3+ other recordings: 14
+   Cross-Axis           flicks          0, of them at a spot shared with 3+ other recordings: 0
+   Alt. Blend           steps+bursts  884, of them at a spot shared with 3+ other recordings: 95
+   Alt. Blend           flicks          3, of them at a spot shared with 3+ other recordings: 0
+
+summary            passes  coil p-p +/-   coil sd +/-    fwd-back rms  X-locked  Y-locked  flicks/s  steps/s
+rc5 control            9   0.468/0.581    0.093/0.110    0.069        0.157     0.119       0.0      0.1
+Coil Linearization    17   0.434/0.600    0.088/0.117    0.081        0.066     0.071       0.0      0.1
+Pen-Anchored          20   0.959/1.029    0.206/0.218    0.157        0.229     0.269       0.0      1.1
+Midpoint Gauss        23   1.659/1.397    0.314/0.277    0.185        0.310     0.491       0.0     11.9
+Cross-Axis            39   0.747/0.751    0.140/0.150    0.133        0.109     0.122       0.0      0.4
+Alt. Blend            49   1.031/0.915    0.210/0.172    0.141        0.276     0.284       0.1     15.0

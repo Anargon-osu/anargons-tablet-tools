@@ -1,0 +1,9 @@
+== calibration steps played in the digital twin (integrating receiver): calibration-regressions-work\normal.hex
+   Tracked pen resonance: no fresh light-contact frequency readings.
+   Signal (strongest line, last sample):
+       resting 0, 5 mm 0, highest hover not seen, lowest while lifting 0
+       pen-away receiver noise: not measured (reports stop when tracking stops)
+   Report rate 0.0/s; pressure resting lightly 0; position spread at 5 mm 0.000 mm (standard deviation)
+   Note: No calibration reports while resting lightly. Check the calibration firmware and close the tablet driver.
+RESULT calibrate pick=0 drop=0 boost_at=0 odd_mm=0.000 ok=0
+RESULT calibration regressions passed: 88

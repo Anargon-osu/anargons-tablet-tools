@@ -1,0 +1,8 @@
+    Touching (40/40)          Low hover (40/40)         High hover (40/40)
+    OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK
+    OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK
+    OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK
+    OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK
+    OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK   OK OK OK OK OK OK OK OK
+
+602479 readings, 177 s, touch level 136 - every square OK

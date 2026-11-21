@@ -1,0 +1,5 @@
+PASS process lifetime: exit
+PASS process lifetime: kill
+PASS process lifetime: cancel
+PASS process lifetime: cancel-gate
+RESULT Windows process lifetime: 4 passed (fake child tree only)

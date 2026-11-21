@@ -1,0 +1,366 @@
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./firmware image.hex" --runtime-pid 2904 --pid FFF1
+        Starting update...
+    Update failed (exit status 7). See the tool output above.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./firmware image.hex" --runtime-pid 2904 --pid FFF1
+        [ERROR] Verification failed
+    Update failed (exit status 0). See the tool output above.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./firmware image.hex" --runtime-pid 2904 --pid FFF1
+    xppen-tools completed the update successfully.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./firmware image.hex" --runtime-pid 2904 --pid FFF1
+        Starting update...
+    Update failed (exit status 7). See the tool output above.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./firmware image.hex" --runtime-pid 2904 --pid FFF1
+        [ERROR] Verification failed
+    Update failed (exit status 0). See the tool output above.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./firmware image.hex" --runtime-pid 2904 --pid FFF1
+    xppen-tools completed the update successfully.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./normal firmware.hex" --runtime-pid 2904 --pid FFF1
+        Starting update...
+    Update failed (exit status 7). See the tool output above.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./normal firmware.hex" --runtime-pid 2904 --pid FFF1
+        [ERROR] Verification failed
+    Update failed (exit status 0). See the tool output above.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./firmware image.hex" --runtime-pid 2904 --pid FFF1
+    xppen-tools completed the update successfully.
+    Flash dry run: commands only; no tablet commands were run.
+        xppen-tools dfu --runtime-pid 2904 --pid FFF1
+        xppen-tools dump "./release/anargons-deco640-tools/app/last-dump"
+        xppen-tools update "./firmware image.hex" --runtime-pid 2904 --pid FFF1
+--flash-dry-run needs a preset (--rate) and cannot be combined with calibration, recovery or the wizard.
+--flash-dry-run needs a preset (--rate) and cannot be combined with calibration, recovery or the wizard.
+--samples is outside 0 to 2147483647.
+--samples needs a whole number from 0 to 2147483647.
+--detect-scale needs a finite number from 0 to 1000000.
+--odd-mm needs a finite number from 0 to 1000000.
+    Waiting for the startup backup (a full tablet dump can take about 3 minutes)...
+
+  ############################################################################################
+  ############################################################################################
+
+
+  ############################################################################################
+  ############################################################################################
+
+    test acknowledgement > 
+
+Building preset 3/5: FAST (500) - balanced
+
+    One frame every 2000 microseconds
+    Build details:      ./main-20261104-141739.log
+    For bug reports:    ./verbose-20261104-141739.log
+
+    Wrote ./[VOLATILE]dry build.hex:
+        complete image 0x8003800..0x800d1c0, 39360 bytes, 11840 bytes of flash left
+
+    Digital-twin check (full PC speed)
+
+        Boot:          ok (21013 instructions to the main loop)
+        USB:           ok (VID 28BD, PID 2904, 3 HID interfaces; endpoint layout and HID reports validated)
+                       IN bInterval 1; model polls every 1 ms
+        Flash count:   readable over USB without a dump (string 173: ADTC1:N:000000)
+        Gain control:  ok (every AGC delay leaves at least one summed sample)
+        Pen detection: ok at all 4 test frequencies
+
+    Boot, USB, gain-control and pen checks passed.
+
+    Measurements (estimates from the digital twin at a simulated 72 MHz)
+
+        Frame period:      1996.584596 us mean   (1592.430556 us .. 2361.861111 us)
+        Frame work:        1543.886250 us mean   (max 1647.194444 us)
+        Processing:        101.276389 us mean   (max 140.583333 us)
+        Cursor latency:    8.8 ms   (stock firmware 16.0 ms; 7.2 ms lower)   interpolation + smoothing + report interval
+        Position step:     0.010 mm (the tablet reports in 0.01 mm units)
+        Still-pen spread:  X 0.005 mm, Y 0.005 mm (sd), 0.020 mm peak to peak
+        Worst error:       4.507 mm while sliding across 2 coils (-4.963 mm per coil)
+        (spread uses the twin's synthetic noise - compare builds with it; the signal-threshold measurement records the real one)
+    Digital-twin check passed (20.6 s)
+    Flash dry run: commands only; no tablet commands were run.
+        xppen-tools dfu --runtime-pid 2904 --pid FFF1
+        xppen-tools dump "./release/anargons-deco640-tools/app/last-dump"
+        xppen-tools update "./[VOLATILE]dry build.hex" --runtime-pid 2904 --pid FFF1
+Building preset 3/5: FAST (500) - balanced
+
+    One frame every 2000 microseconds
+    Build details:      ./measurement/main-20261104-141739.log
+    For bug reports:    ./measurement/verbose-20261104-141739.log
+
+    Wrote ./measurement/[VOLATILE]fast-measurement.hex:
+        complete image 0x8003800..0x800cfe0, 38880 bytes, 12320 bytes of flash left
+
+    Digital-twin check (full PC speed)
+
+        Boot:          ok (21001 instructions to the main loop)
+        USB:           ok (VID 28BD, PID 2904, 3 HID interfaces; endpoint layout and HID reports validated)
+                       IN bInterval 1; model polls every 1 ms
+        Flash count:   readable over USB without a dump (string 173: ADTC1:N:000000)
+        Gain control:  ok (every AGC delay leaves at least one summed sample)
+        Pen detection: ok at all 4 test frequencies
+
+    Boot, USB, gain-control and pen checks passed.
+
+    Measurements (estimates from the digital twin at a simulated 72 MHz)
+
+        Frame period:      1996.492003 us mean   (1590.513889 us .. 2365.625000 us)
+        Frame work:        1543.757917 us mean   (max 1646.277778 us)
+        Processing:        101.127778 us mean   (max 141.569444 us)
+        Cursor latency:    11.2 ms   (stock firmware 16.0 ms; 4.8 ms lower)   interpolation + smoothing + report interval
+        Position step:     0.010 mm (the tablet reports in 0.01 mm units)
+        Still-pen spread:  X 0.005 mm, Y 0.006 mm (sd), 0.010 mm peak to peak
+        Worst error:       3.078 mm while sliding across 2 coils (-5.042 mm per coil)
+        (spread uses the twin's synthetic noise - compare builds with it; the signal-threshold measurement records the real one)
+    Digital-twin check passed (20.7 s)
+    Flash dry run: commands only; no tablet commands were run.
+        xppen-tools dfu --runtime-pid 2904 --pid FFF1
+        xppen-tools dump "./release/anargons-deco640-tools/app/last-dump"
+        xppen-tools update "./measurement/[VOLATILE]fast-measurement.hex" --runtime-pid 2904 --pid FFF1
+Building preset 3/5: FAST (500) - balanced
+
+    One frame every 2000 microseconds
+    Build details:      ./measurement/main-20261104-141739-2.log
+    For bug reports:    ./measurement/verbose-20261104-141739-2.log
+
+    Wrote ./measurement/[VOLATILE]fast-measurement.hex:
+        complete image 0x8003800..0x800cfe0, 38880 bytes, 12320 bytes of flash left
+
+    Digital-twin check (full PC speed)
+
+        Boot:          ok (21001 instructions to the main loop)
+        USB:           ok (VID 28BD, PID 2904, 3 HID interfaces; endpoint layout and HID reports validated)
+                       IN bInterval 1; model polls every 1 ms
+        Flash count:   readable over USB without a dump (string 173: ADTC1:N:000000)
+        Gain control:  ok (every AGC delay leaves at least one summed sample)
+        Pen detection: ok at all 4 test frequencies
+
+    Boot, USB, gain-control and pen checks passed.
+
+    Measurements (estimates from the digital twin at a simulated 72 MHz)
+
+        Frame period:      1996.492003 us mean   (1590.513889 us .. 2365.625000 us)
+        Frame work:        1543.757917 us mean   (max 1646.277778 us)
+        Processing:        101.127778 us mean   (max 141.569444 us)
+        Cursor latency:    11.2 ms   (stock firmware 16.0 ms; 4.8 ms lower)   interpolation + smoothing + report interval
+        Position step:     0.010 mm (the tablet reports in 0.01 mm units)
+        Still-pen spread:  X 0.005 mm, Y 0.006 mm (sd), 0.010 mm peak to peak
+        Worst error:       3.078 mm while sliding across 2 coils (-5.042 mm per coil)
+        (spread uses the twin's synthetic noise - compare builds with it; the signal-threshold measurement records the real one)
+    Digital-twin check passed (20.8 s)
+
+  Backup before flashing
+  ----------------------
+
+    Every flash starts with a fresh, complete backup of the connected tablet (about 3 minutes).
+    The latest is last-dump/ic902-main.bin; permanent copies are kept in dumps/ and listed in
+    dumps/dumps.txt.
+
+    Backup saved: ./measurement/last-dump/ic902-main.bin   (list: ./measurement/dumps/dumps.txt)
+    The tablet is in DFU mode now (to leave without flashing: xppen-tools exit-dfu --pid FFF1).
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./measurement/[VOLATILE]fast-measurement.hex" --runtime-pid 2904 --pid FFF1
+    xppen-tools completed the update successfully.
+Measurement firmware installed. Run --pen-resonance to read the tracked frequency, then flash a checked normal preset to restore cursor reports.
+The tablet may still have calibration firmware installed; normal cursor reports can be disabled until it is replaced.
+Build a normal preset from your original stock dump and flash its checked .hex, or restore stock before using the tablet.
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./[VOLATILE]dry build.hex" --runtime-pid 2904 --pid FFF1
+    xppen-tools completed the update successfully.
+--no-volatile/--discreet cannot be combined with RAPID. Use FAST or a slower preset to keep firmware data unchanged.
+
+Building preset 3/5: FAST (500) - balanced
+
+    One frame every 2000 microseconds
+    Build details:      ./main-20261104-141739-2-2.log
+    For bug reports:    ./verbose-20261104-141739-2-2.log
+
+    Wrote ./[VOLATILE]flash build.hex:
+        complete image 0x8003800..0x800d1c0, 39360 bytes, 11840 bytes of flash left
+
+    Digital-twin check (full PC speed)
+
+        Boot:          ok (21013 instructions to the main loop)
+        USB:           ok (VID 28BD, PID 2904, 3 HID interfaces; endpoint layout and HID reports validated)
+                       IN bInterval 1; model polls every 1 ms
+        Flash count:   readable over USB without a dump (string 173: ADTC1:N:000000)
+        Gain control:  ok (every AGC delay leaves at least one summed sample)
+        Pen detection: ok at all 4 test frequencies
+
+    Boot, USB, gain-control and pen checks passed.
+
+    Measurements (estimates from the digital twin at a simulated 72 MHz)
+
+        Frame period:      1996.584596 us mean   (1592.430556 us .. 2361.861111 us)
+        Frame work:        1543.886250 us mean   (max 1647.194444 us)
+        Processing:        101.276389 us mean   (max 140.583333 us)
+        Cursor latency:    8.8 ms   (stock firmware 16.0 ms; 7.2 ms lower)   interpolation + smoothing + report interval
+        Position step:     0.010 mm (the tablet reports in 0.01 mm units)
+        Still-pen spread:  X 0.005 mm, Y 0.005 mm (sd), 0.020 mm peak to peak
+        Worst error:       4.507 mm while sliding across 2 coils (-4.963 mm per coil)
+        (spread uses the twin's synthetic noise - compare builds with it; the signal-threshold measurement records the real one)
+    Digital-twin check passed (20.8 s)
+
+  Backup before flashing
+  ----------------------
+
+    Every flash starts with a fresh, complete backup of the connected tablet (about 3 minutes).
+    The latest is last-dump/ic902-main.bin; permanent copies are kept in dumps/ and listed in
+    dumps/dumps.txt.
+
+    Backup saved: ./last-dump/ic902-main.bin   (list: ./dumps/dumps.txt)
+    The tablet is in DFU mode now (to leave without flashing: xppen-tools exit-dfu --pid FFF1).
+
+    ############################################################################
+    #                                                                          #
+    #    FLASHING                                                              #
+    #                                                                          #
+    #        The bootloader erases and replaces the firmware area              #
+    #        (0x08003800-0x0800FFFF). This image passed the digital-twin       #
+    #        checks. Keep the complete backup for recovery, and keep USB       #
+    #        power connected until the update finishes. xppen-tools asks       #
+    #        for its typed confirmation before writing.                        #
+    #                                                                          #
+    ############################################################################
+
+        $ xppen-tools update "./[VOLATILE]flash build.hex" --runtime-pid 2904 --pid FFF1
+        Starting update...
+    Update failed (exit status 7). See the tool output above.
+RESULT host regressions: 67 passed (fake xppen-tools only)

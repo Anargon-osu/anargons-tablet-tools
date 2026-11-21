@@ -1,0 +1,41 @@
+== smoke checks (no tablet or stock firmware required)
+  ok    selftest: exit status 0
+  ok    twin self-test assertions complete
+  ok    help: exit status 0
+  ok    help names both tools
+  ok    menu: exit status 2
+  ok    first screen offers both tools
+  ok    recovery-small: exit status 1
+  ok    recovery refuses incomplete dumps
+  ok    recovery-hex: exit status 1
+  ok    recovery refuses HEX input
+  ok    counter-B: exit status 0
+  ok    counter value and provenance: Bootloader
+  ok    counter-F: exit status 0
+  ok    counter value and provenance: Firmware
+  ok    counter-local: exit status 0
+  ok    disconnected tablet uses local counter
+  ok    setup: exit status 0
+  ok    setup explains OS permissions
+  ok    pid: exit status 1
+  ok    USB IDs cannot be changed
+  ok    feb: untouched 64 KB stock dump verified by firmware CRC
+  ok    feb: firmware-backed host/calibration/core regressions
+  ok    compat-feb: exit status 0
+  ok    feb: all modifications compatible
+  ok    all-feb: exit status 0
+  ok    feb: all five presets pass the digital twin
+  ok    feb: all presets answer USB counter string 173
+  ok    feb: exactly five speed-named firmware images disclose volatile changes
+  ok    recovery-good-feb: exit status 0
+  ok    feb: stock firmware is not repaired
+  ok    flasher-damaged-feb: exit status 1
+  ok    feb: flasher refuses damaged firmware
+  ok    recovery-feb: exit status 0
+  ok    feb: twin verifies repair and update mode
+  ok    feb: repair image produced
+  ok    feb: recovery commands quote absolute paths in the chosen output folder
+  ok    feb: restored firmware has exact stock CRC
+  skip  ADT_TEST_STOCK_DUMP_DEC missing; dec firmware was not tested
+== 37 passed, 0 failed, 1 skipped
+logs: ./.audit-work/r37-final/work/integration

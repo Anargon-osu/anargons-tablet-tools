@@ -1,0 +1,15 @@
+Unknown check: typo. Use boot,usb,agc,sens,scan.
+--every must be at least 1 ms and --hover-speed must be positive; both must be finite.
+== tests/work\core-invalid-usb.bin
+   boot: ok (19573 instructions to the main loop)
+RESULT boot ok 19573
+   ENUMERATION FAILED: Unsupported USB endpoint address 0x84 (model supports endpoints 1 to 3)
+RESULT usb fail
+RESULT fail
+== tests/work\core-invalid-usb.bin
+   boot: ok (19573 instructions to the main loop)
+RESULT boot ok 19573
+   ENUMERATION FAILED: Unsupported USB endpoint address 0x84 (model supports endpoints 1 to 3)
+RESULT usb fail
+RESULT fail
+core regressions: 130 passed

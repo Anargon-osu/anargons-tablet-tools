@@ -1,0 +1,36 @@
+line at 33.00 deg through (66.5, 39.3) mm (all six); sideways = -0.545 X +0.839 Y
+common stretch: -68.2 to 73.8 mm along the line (142 mm), covered by 2+ passes each way in all six; pass speeds 15-52 mm/s
+   rc5 control          pass speeds (mm/s): 17 22 25 24 35 25 20 50
+   Coil Linearization   pass speeds (mm/s): 29 36 42 36 37 34 32 38 39 47 46 44 47 49 45 43
+
+== rc5 control (i1-control): 8 passes (5 +, 3 -), speed median 25 mm/s, pressure median 16383 (10-90 % 8937-16383), frames 1 ms apart 100.0 %
+   direction +1: repeatable p-p 1.085 mm; slow p-p 0.521; coil-scale p-p 0.615, sd 0.093; pass scatter sd 0.115
+   direction -1: repeatable p-p 1.087 mm; slow p-p 0.689; coil-scale p-p 0.648, sd 0.109; pass scatter sd 0.159
+   forward minus back (coil-scale): max 0.212 mm, rms 0.073
+   coil-locked: X phase p-p 0.143 mm sideways (X error about 0.262), Y phase p-p 0.118 (Y error about 0.140); rms 0.095 -> 0.074 after both
+      X phase 0..15/16: -0.01 -0.03 -0.04 -0.05 -0.06 -0.06 -0.05 -0.03 -0.02 +0.01 +0.04 +0.07 +0.08 +0.06 +0.03 +0.00
+      Y phase 0..15/16: +0.03 +0.03 +0.03 +0.06 +0.06 +0.03 -0.01 -0.03 -0.05 -0.04 -0.05 -0.05 -0.03 -0.00 +0.01 +0.02
+   breaks inside a pass: 11 (tip off 0 of them,  ms; pressure before / after median 0 / 0); report gaps over 3 ms with the tip down: 11
+   X: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 5 (0.1/s, median 0.53), bursts 0
+   Y: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 0 (0.0/s, median nan), bursts 0
+
+== Coil Linearization (i2-cl): 16 passes (8 +, 8 -), speed median 42 mm/s, pressure median 16383 (10-90 % 12195-16383), frames 1 ms apart 99.9 %
+   direction +1: repeatable p-p 0.900 mm; slow p-p 0.416; coil-scale p-p 0.571, sd 0.088; pass scatter sd 0.114
+   direction -1: repeatable p-p 1.352 mm; slow p-p 1.004; coil-scale p-p 0.606, sd 0.110; pass scatter sd 0.183
+   forward minus back (coil-scale): max 0.232 mm, rms 0.083
+   coil-locked: X phase p-p 0.083 mm sideways (X error about 0.153), Y phase p-p 0.054 (Y error about 0.064); rms 0.090 -> 0.084 after both
+      X phase 0..15/16: -0.01 -0.04 -0.03 -0.04 -0.03 -0.04 -0.01 -0.01 +0.01 +0.02 +0.04 +0.04 +0.04 +0.01 +0.01 -0.02
+      Y phase 0..15/16: -0.02 -0.02 -0.01 +0.01 +0.02 +0.02 +0.01 +0.00 +0.02 +0.01 +0.02 +0.02 -0.01 -0.02 -0.03 -0.03
+   breaks inside a pass: 28 (tip off 6 of them, 13/13/2/121/13/247 ms; pressure before / after median 2319 / 4220); report gaps over 3 ms with the tip down: 22
+   X: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 7 (0.1/s, median 1.38), bursts 2
+   Y: flicks 0 (0.0/s, median nan mm, 0 % at a coil midpoint +-0.15), steps 1 (0.0/s, median 1.23), bursts 0
+
+== same spot in other recordings (within 1 mm along the line): steps and bursts, then flicks
+   rc5 control          steps+bursts    5, of them at a spot shared with 3+ other recordings: 0
+   rc5 control          flicks          0, of them at a spot shared with 3+ other recordings: 0
+   Coil Linearization   steps+bursts   10, of them at a spot shared with 3+ other recordings: 0
+   Coil Linearization   flicks          0, of them at a spot shared with 3+ other recordings: 0
+
+summary            passes  coil p-p +/-   coil sd +/-    fwd-back rms  X-locked  Y-locked  flicks/s  steps/s
+rc5 control            8   0.615/0.648    0.093/0.109    0.073        0.143     0.118       0.0      0.1
+Coil Linearization    16   0.571/0.606    0.088/0.110    0.083        0.083     0.054       0.0      0.1

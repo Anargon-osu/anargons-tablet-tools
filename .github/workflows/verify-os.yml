@@ -1,0 +1,121 @@
+name: verify-os
+on:
+  workflow_call:
+    inputs:
+      rid:
+        required: true
+        type: string
+      primary_runner:
+        required: true
+        type: string
+      primary_name:
+        required: true
+        type: string
+      fallback_runner:
+        required: false
+        default: ''
+        type: string
+      fallback_name:
+        required: false
+        default: 'Fallback'
+        type: string
+      required:
+        required: false
+        default: true
+        type: boolean
+      runtime_version:
+        required: true
+        type: string
+    outputs:
+      passed:
+        value: ${{ jobs.hold.outputs.passed }}
+      primary_ok:
+        value: ${{ jobs.hold.outputs.primary_ok }}
+permissions:
+  contents: read
+jobs:
+  primary:
+    name: ${{ inputs.primary_name }}
+    runs-on: ${{ inputs.primary_runner }}
+    timeout-minutes: 45
+    outputs:
+      passed: ${{ steps.verify.outcome == 'success' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          submodules: true
+          persist-credentials: false
+      - id: verify
+        continue-on-error: true
+        uses: ./.github/actions/verify
+        with:
+          rid: ${{ inputs.rid }}
+          log_name: ${{ inputs.rid }}-primary
+          runtime_version: ${{ inputs.runtime_version }}
+          gd32emu_token: ${{ secrets.GD32EMU_TOKEN || secrets.ADT_TEST_DUMP_TOKEN }}
+          gd32emu_url: ${{ vars.GD32EMU_URL }}
+          gd32emu_sha256: ${{ vars.GD32EMU_SHA256 }}
+          gd32emu_repo: ${{ vars.GD32EMU_REPO }}
+          gd32emu_ref: ${{ vars.GD32EMU_REF }}
+          adt_test_dumps_repo: ${{ vars.ADT_TEST_DUMPS_REPO }}
+          adt_test_dumps_ref: ${{ vars.ADT_TEST_DUMPS_REF }}
+          adt_test_stock_dump: ${{ secrets.ADT_TEST_STOCK_DUMP_URL || vars.ADT_TEST_STOCK_DUMP_URL }}
+          adt_test_stock_dump_dec: ${{ secrets.ADT_TEST_STOCK_DUMP_DEC_URL || vars.ADT_TEST_STOCK_DUMP_DEC_URL }}
+          adt_test_dump_token: ${{ secrets.ADT_TEST_DUMP_TOKEN }}
+      - name: Check required
+        if: steps.verify.outcome != 'success' && inputs.fallback_runner == '' && inputs.required
+        shell: bash
+        run: exit 1
+
+  fallback:
+    name: ${{ inputs.fallback_name }}
+    needs: primary
+    if: always() && inputs.fallback_runner != '' && needs.primary.outputs.passed != 'true'
+    runs-on: ${{ inputs.fallback_runner }}
+    timeout-minutes: 45
+    outputs:
+      passed: ${{ steps.verify.outcome == 'success' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          submodules: true
+          persist-credentials: false
+      - id: verify
+        continue-on-error: true
+        uses: ./.github/actions/verify
+        with:
+          rid: ${{ inputs.rid }}
+          log_name: ${{ inputs.rid }}-fallback
+          runtime_version: ${{ inputs.runtime_version }}
+          gd32emu_token: ${{ secrets.GD32EMU_TOKEN || secrets.ADT_TEST_DUMP_TOKEN }}
+          gd32emu_url: ${{ vars.GD32EMU_URL }}
+          gd32emu_sha256: ${{ vars.GD32EMU_SHA256 }}
+          gd32emu_repo: ${{ vars.GD32EMU_REPO }}
+          gd32emu_ref: ${{ vars.GD32EMU_REF }}
+          adt_test_dumps_repo: ${{ vars.ADT_TEST_DUMPS_REPO }}
+          adt_test_dumps_ref: ${{ vars.ADT_TEST_DUMPS_REF }}
+          adt_test_stock_dump: ${{ secrets.ADT_TEST_STOCK_DUMP_URL || vars.ADT_TEST_STOCK_DUMP_URL }}
+          adt_test_stock_dump_dec: ${{ secrets.ADT_TEST_STOCK_DUMP_DEC_URL || vars.ADT_TEST_STOCK_DUMP_DEC_URL }}
+          adt_test_dump_token: ${{ secrets.ADT_TEST_DUMP_TOKEN }}
+      - name: Check required
+        if: steps.verify.outcome != 'success' && inputs.required
+        shell: bash
+        run: exit 1
+
+  hold:
+    name: Ready
+    needs: [primary, fallback]
+    if: always() && (needs.primary.outputs.passed == 'true' || needs.fallback.outputs.passed == 'true' || !inputs.required)
+    runs-on: ${{ ((!startsWith(inputs.primary_runner, 'avrea-') && needs.primary.outputs.passed == 'true') || (!startsWith(inputs.fallback_runner, 'avrea-') && needs.fallback.outputs.passed == 'true')) && 'ubuntu-latest' || 'avrea-ubuntu-latest' }}
+    outputs:
+      passed: ${{ steps.out.outputs.passed }}
+      primary_ok: ${{ steps.out.outputs.primary_ok }}
+    steps:
+      - id: out
+        shell: bash
+        env:
+          PRIMARY_OK: ${{ needs.primary.outputs.passed == 'true' }}
+          PASSED: ${{ needs.primary.outputs.passed == 'true' || needs.fallback.outputs.passed == 'true' }}
+        run: |
+          echo "passed=$PASSED" >> "$GITHUB_OUTPUT"
+          echo "primary_ok=$PRIMARY_OK" >> "$GITHUB_OUTPUT"

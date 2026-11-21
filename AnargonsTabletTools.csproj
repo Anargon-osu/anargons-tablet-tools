@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- anargons-tablet-tools as one self-contained executable per platform (dotnet publish -r win-x64 / linux-x64 / osx-x64 /
+       osx-arm64). build.cmd builds the small Windows-only version with the C# compiler that ships with Windows.
+       Both put the executable next to the build scripts. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>AnargonsTabletTools</AssemblyName>
+    <LangVersion>5</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Optimize>true</Optimize>
+    <StartupObject Condition="'$(StartupObject)' == ''">AnargonsTabletTools.Program</StartupObject>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+  </PropertyGroup>
+  <!-- The separate gd32emu repository may be a sibling or a pinned submodule. GD32EMU_DIR or -p:Gd32EmuDir=... can select its source folder. -->
+  <PropertyGroup>
+    <Gd32EmuDir Condition="'$(Gd32EmuDir)' == '' and '$(GD32EMU_DIR)' != ''">$(GD32EMU_DIR)</Gd32EmuDir>
+    <Gd32EmuDir Condition="'$(Gd32EmuDir)' == '' and Exists('gd32emu/gd32emu.cs')">gd32emu/</Gd32EmuDir>
+    <Gd32EmuDir Condition="'$(Gd32EmuDir)' == '' and Exists('../gd32emu/gd32emu.cs')">../gd32emu/</Gd32EmuDir>
+    <Gd32EmuDir>$([MSBuild]::EnsureTrailingSlash('$(Gd32EmuDir)'))</Gd32EmuDir>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <Target Name="CheckGd32Emu" BeforeTargets="BeforeBuild" Condition="!Exists('$(Gd32EmuDir)gd32emu.cs')">
+    <Error Text="The gd32emu emulator source was not found (looked in GD32EMU_DIR, ./gd32emu and ../gd32emu). See DOCS/EMULATOR.md." />
+  </Target>
+  <ItemGroup>
+    <Compile Include="$(Gd32EmuDir)gd32emu.cs;atf_*.cs" />
+    <Compile Include="$(RegressionSource)" Condition="'$(RegressionSource)' != ''" />
+  </ItemGroup>
+</Project>

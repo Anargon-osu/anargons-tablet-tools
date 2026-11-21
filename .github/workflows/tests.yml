@@ -1,0 +1,70 @@
+name: tests
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  win-x64:
+    name: Windows
+    uses: ./.github/workflows/verify-os.yml
+    secrets: inherit
+    with:
+      rid: win-x64
+      primary_runner: windows-latest
+      primary_name: Github
+      fallback_runner: avrea-windows-2025-4-vcpu
+      fallback_name: Avrea (Fallback)
+      required: true
+      runtime_version: '10.0.14'
+
+  linux-x64:
+    name: Linux
+    uses: ./.github/workflows/verify-os.yml
+    secrets: inherit
+    with:
+      rid: linux-x64
+      primary_runner: ubuntu-latest
+      primary_name: Github
+      fallback_runner: avrea-ubuntu-latest
+      fallback_name: Avrea (Fallback)
+      required: true
+      runtime_version: '10.0.14'
+
+  osx-x64:
+    name: MacOS-x86
+    uses: ./.github/workflows/verify-os.yml
+    secrets: inherit
+    with:
+      rid: osx-x64
+      primary_runner: macos-15-intel
+      primary_name: Github
+      fallback_runner: avrea-macos-latest
+      fallback_name: Avrea (Fallback)
+      required: true
+      runtime_version: '10.0.14'
+
+  osx-arm64:
+    name: MacOS-arm
+    uses: ./.github/workflows/verify-os.yml
+    secrets: inherit
+    with:
+      rid: osx-arm64
+      primary_runner: avrea-macos-latest
+      primary_name: Avrea
+      fallback_runner: macos-15
+      fallback_name: Github (Fallback)
+      required: true
+      runtime_version: '10.0.14'
+
+  verified:
+    needs: [win-x64, linux-x64, osx-x64, osx-arm64]
+    if: |
+      always() &&
+      needs.win-x64.outputs.passed == 'true' &&
+      needs.linux-x64.outputs.passed == 'true' &&
+      needs.osx-x64.outputs.passed == 'true' &&
+      needs.osx-arm64.outputs.passed == 'true'
+    runs-on: ${{ needs.linux-x64.outputs.primary_ok == 'true' && 'ubuntu-latest' || 'avrea-ubuntu-latest' }}
+    steps:
+      - run: echo "All 4 OS checks passed."

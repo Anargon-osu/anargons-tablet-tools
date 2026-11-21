@@ -1,0 +1,72 @@
+[
+  {
+    "file": "anargons-deco640-tools/atf_backup.cs",
+    "sha256": "4bfbcb21f3ed40de2daa96a2405c329f36ccc35b82b9215cfd6452cdbc2fdddb",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_build.cs",
+    "sha256": "c722cf6691bf414feb7c69390b91e8b850f4f7c8c9a90629e535ce2c4de63e5e",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_cli.cs",
+    "sha256": "5d68be219b7eb134c9b50acbaea6d98fbaeebe0cf5c0f5209e15eb143d6fa467",
+    "change": "rolling revision display only"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_config.cs",
+    "sha256": "22cb28667e7f3fcd28534a3e4218362f818714fbe327de19714b7d5c35f6a6d3",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_hex.cs",
+    "sha256": "fa40ea3ed5604ca9a5616d5d2037bddd3519408756681b5aa0ce2cfc3e0ae8bd",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_layout.cs",
+    "sha256": "64c15241d8984af81480e352ef6df51486b0fdf2b38bfd4951385ff5690e4a59",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_patcher.cs",
+    "sha256": "c44ee001badf25694cc5ea7522c9af5c08412c0e050ca167f5e89d9bbdb9dc34",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_repair.cs",
+    "sha256": "01352177991c7387bcb7647ff325dec1ad9c283772bd3b9386b4d8ac5188739e",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_sched.cs",
+    "sha256": "2518114e2f7711bcdfaf2c88246b046a8a592b852f2d65ee3ef04aaa52e3ae28",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_stockref.cs",
+    "sha256": "d0b9131b95ba0dfdbd0b26198c6246faeecf8caa13dc6f56478b0de8c5b28124",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_symbols.cs",
+    "sha256": "759bbc995619401d49a2115019aa57b4ce7839d402a8d985485fd0bbd22d1998",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "anargons-deco640-tools/atf_twin.cs",
+    "sha256": "aee1c8952d0e73ce37342243696513f1b8faaaeefe0d1aab898166db81b4b0e0",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "gd32emu/gd32emu.cs",
+    "sha256": "32b65f60f16a430ff0e4c601ba31fc556b4ec0291da809090ca32d5196282b34",
+    "change": "byte-identical to verified R37"
+  },
+  {
+    "file": "gd32emu/gd32emu_cli.cs",
+    "sha256": "0600e4cdac3c1e4a4eda6a5c682757d338b0576d2dc9962ce3e2142c3cf270f5",
+    "change": "byte-identical to verified R37"
+  }
+]
